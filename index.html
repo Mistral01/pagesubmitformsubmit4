@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contactez-Nous</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('https://lechti.com/app/uploads/2022/08/c33ed8_45408db5bb994d75bed24e232c8a28f4_mv2.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            color: #333333;
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: #666666;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            align-self: flex-start;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"] {
+            margin-bottom: 15px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        button {
+            padding: 10px;
+            background-color: rgba(255, 76, 76, 0.9);
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: rgba(204, 0, 0, 0.9);
+        }
+
+        .consent {
+            margin-bottom: 15px;
+            text-align: left;
+            font-size: 12px;
+            color: #666666;
+        }
+
+        .consent input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .privacy-policy {
+            font-size: 12px;
+            color: #333333;
+        }
+
+        .privacy-policy a {
+            color: rgba(255, 76, 76, 0.9);
+            text-decoration: none;
+        }
+
+        .privacy-policy a:hover {
+            text-decoration: underline;
+        }
+
+        .thank-you-message {
+            display: none;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #333333;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                background-size: auto;
+                background-position: top;
+            }
+
+            .form-container {
+                width: 90%;
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 18px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Contactez-Nous</h2>
+        <p>Laissez-nous vos coordonnées et vous serez recontacté par l'un de nos coachs Crossfit HEMANTA !</p>
+        <form id="contact-form">
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="nom" required>
+
+            <label for="prenom">Prénom :</label>
+            <input type="text" id="prenom" name="prenom" required>
+
+            <label for="ville">Ville :</label>
+            <input type="text" id="ville" name="ville" required>
+
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="telephone">Téléphone :</label>
+            <input type="tel" id="telephone" name="telephone" required>
+
+            <div class="consent">
+                <input type="checkbox" id="consent" name="consent" required>
+                <label for="consent">J'accepte que mes données soient traitées conformément à la <a href="https://mistral01.github.io/Polconf1/">politique de confidentialité</a>.</label>
+            </div>
+
+            <div class="privacy-policy">
+                <p>Les informations recueillies via ce formulaire font l’objet d’un traitement destiné à répondre à votre demande. Conformément à la loi, vous disposez d'un droit d'accès, de rectification et de suppression des données vous concernant.</p>
+            </div>
+
+            <button type="submit">JE VEUX ÊTRE RECONTACTÉ(É)</button>
+        </form>
+        <div class="thank-you-message" id="thank-you-message">
+            Merci ! Vous serez contacté prochainement par l'un de nos coachs Crossfit HEMANTA.
+        </div>
+    </div>
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        // Remplacez 'YOUR_USER_ID' par votre EmailJS User ID
+        emailjs.init('YOUR_USER_ID');
+
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            var form = event.target;
+            var formData = new FormData(form);
+
+            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', formData)
+                .then(function(response) {
+                    form.reset();
+                    document.getElementById('thank-you-message').style.display = 'block';
+                }, function(error) {
+                    alert('Une erreur est survenue. Veuillez réessayer plus tard.');
+                });
+        });
+    </script>
+</body>
+</html>
